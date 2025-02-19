@@ -115,3 +115,16 @@ if [ "$1" = "getMetadata" ];
     echo $METADATA
 fi
 
+if [ "$1" = "getDeployed" ];
+  then
+  CURL_DATA='{"projectName": '\"$3\"', "stage": '\"$2\"'}'
+
+  VERSION=$(curl -s \
+    -H "Content-Type: application/json" \
+    --request POST \
+    --data "$CURL_DATA" \
+    https://api.kube.iungo.ink/project/deploy/get)
+
+  echo $VERSION
+fi
+
